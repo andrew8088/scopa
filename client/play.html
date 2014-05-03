@@ -1,0 +1,72 @@
+<template name='play'>
+    {{> signupLogin}}
+    {{#if currentUser}}
+        {{> status}}
+        {{#unless inProgress}}
+            {{> score}}
+        {{/unless}}
+        {{#if inProgress}}
+            {{> table}}
+            {{> hand}}
+        {{/if}}
+        {{> pile}}
+    {{/if}}
+</template>
+
+<template name='status'>
+<p> <a href='/'> &larr; Home </a> </p>
+<h2> Game between you and {{otherPlayer.username}} {{#if inProgress}} {{#if yourTurn}} (Your Turn) {{/if}} {{/if}}</h2>
+</template>
+
+<template name='score'>
+    <h1> Game Over! {{ message }} </h1>
+
+    <table>
+        <tr>
+            <th> Category </th>
+            <th> You </th>
+            <th> {{otherPlayer.username}} </th>
+        </tr>
+        <tr><td>Most Cards</td><td>{{player.score.mostCards}}</td><td>{{otherPlayer.score.mostCards}}</td></tr>
+        <tr><td>Most Coins</td><td>{{player.score.mostCoins}}</td> <td>{{otherPlayer.score.mostCoins}}</td></tr>
+        <tr><td>Sette Bello</td><td>{{player.score.setteBello}}</td> <td>{{otherPlayer.score.setteBello}}</td></tr>
+        <tr><td>Primera</td><td>{{player.score.primera}}</td> <td>{{otherPlayer.score.primera}}</td></tr>
+        <tr><td>Scopa</td><td>{{player.score.scopa}}</td> <td>{{otherPlayer.score.scopa}}</td></tr>
+        <tr><td>Total</td><td>{{player.score.total}}</td> <td>{{otherPlayer.score.total}}</td> </tr>
+    </table>
+</template>
+
+<template name='table'>
+<div id='table'>
+    <h2> Table </h2>
+    {{#each table}}
+    <div class='card {{suit}}'>
+        <div>{{name}}</div>
+        <div>{{suit}}</div>
+    </div>
+    {{/each}}
+</div>
+</template>
+
+<template name='hand'>
+<div id='hand'>
+    <h2> Hand </h2>
+    {{#each player.hand}}
+    <div class='card {{suit}}'>
+        <div>{{name}}</div>
+        <div>{{suit}}</div>
+    </div>
+    {{/each}}
+</div>
+</template>
+
+<template name='pile'>
+<div id='pile'>
+    <h2> Collected Cards </h2>
+    <ul>
+        {{#each player.pile}}
+            <li>{{name}} of {{suit}}</li>
+        {{/each}}
+    </ul>
+</div>
+</template>

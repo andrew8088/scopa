@@ -1,0 +1,57 @@
+<template name='home'>
+    {{> signupLogin}}
+    {{#if currentUser}}
+        {{> gameList}}
+        {{> userList}}
+    {{/if}}
+</template>
+
+
+<template name='gameList'>
+<div class='column'>
+<h1> Games </h1>
+<ul>
+    {{#each games}}
+        {{> gameItem}}
+    {{/each}}
+</ul>
+
+<h1> Completed Games </h1>
+<ul>
+    {{#each completedGames}}
+        {{> gameItem}}
+    {{/each}}
+</ul>
+
+</div>
+</template>
+
+<template name='gameItem'>
+    <li>
+    <a href='/game/{{_id}}'>Game with {{otherPlayer}}
+        <span>
+            {{#if inProgress}}
+                started {{started}}
+            {{else}}
+                finished {{finished}} ({{message}})
+            {{/if}}
+        </span>
+    </a>
+    </li>
+</template>
+
+<template name='userList'>
+    <div class='column'>
+        <h1> Users </h1>
+        <p> Choose anothe user to start a game with them : </p>
+        <ul>
+            {{#each users}}
+                {{> userItem}} 
+            {{/each}}
+        </ul>
+    </div>
+</template>
+
+<template name='userItem'>
+<li><button>{{username}}</button></li>
+</template>
